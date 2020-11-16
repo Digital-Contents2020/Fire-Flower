@@ -12,12 +12,6 @@ public class ProjectileManager : MonoBehaviour
     // 非アクティブな弾のオブジェクトプール
     private Stack<Projectile> inactivePool = new Stack<Projectile>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -33,19 +27,28 @@ public class ProjectileManager : MonoBehaviour
     }
 
     // 弾を発射（アクティブ化）するメソッド
-    public void Fire(Vector3 origin, float angle){
+    public void Fire(int id, int ownerId, Vector3 origin, float angle){
         // 非アクティブの弾があれば使い回す、なければ生成する
         var projectile = (inactivePool.Count > 0)
             ? inactivePool.Pop()
             : Instantiate(projectilePrefab, transform);
-        projectile.Activate(origin, angle);
+        projectile.Activate(id, ownerId, origin, angle);
         activeList.Add(projectile);
     }
 
-    // 弾を消去（非アクティブ化）するメソッド
-    public void Remove(Projectile projectile){
+    public void Remove(Projectile projectile) {
         activeList.Remove(projectile);
         projectile.Deactivate();
         inactivePool.Push(projectile);
+    }
+
+    // 弾を消去（非アクティブ化）するメソッド
+    public void Remove(int id, int ownerId){
+        foreach(var projectile in activeList){
+            if(projectile.Equals(id, ownerId)) {
+                Remove(id, ownerId);
+                break;
+            }
+        }
     }
 }
