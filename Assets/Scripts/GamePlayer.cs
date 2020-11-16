@@ -6,13 +6,19 @@ using UnityEngine;
 // MonoBehaviourPunCallbacksを継承すると、photonViewプロパティが使えるようになる
 public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
 {
+    [SerializeField]
+    private Projectile projectilePrefab = default;
+
     private SpriteRenderer spriteRenderer;
     private float hue = 0f;
     private bool isMoving = false;
 
+    private Camera cam;
+
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         ChangeBodyColor();
+        cam = Camera.main;
     }
 
     private void Update() {
@@ -23,14 +29,33 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
             // 移動速度を時間に依存させて、移動量を求める
             var dv = 6f * Time.deltaTime * direction;
             transform.Translate(dv.x, dv.y, 0f);
-
+            
+            // 移動中なら色相変化
             isMoving = direction.magnitude > 0f;
             if(isMoving){
                 hue = (hue + Time.deltaTime) % 1f;
             }
 
             ChangeBodyColor();
+
+            // 左クリックでカーソルの方向に弾を発射する処理を行う
+            if (Input.GetMouseButtonDown(0)) {
+                var playerWorldPosition = transform.position;
+                var mousePos = Input.mousePosition;
+                mousePos.z = 10.0f;
+                var mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePos);
+                var dp = mouseWorldPosition - playerWorldPosition;
+                float angle = Mathf.Atan2(dp.y, dp.x);
+
+                FireProjectile(angle);
+            }
         }
+    }
+
+    // 弾を発射するメソッド
+    private void FireProjectile(float angle) {
+        var projectile = Instantiate(projectilePrefab);
+        projectile.Init(transform.position, angle);
     }
 
     // データを送受信するメソッド
