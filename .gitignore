@@ -46,6 +46,11 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.dll
+*.cache
+MonoBleedingEdge/*
+Fire Flower_Data/*
+
 
 # Unity3D generated meta files
 *.pidb.meta
