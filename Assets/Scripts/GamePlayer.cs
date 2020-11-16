@@ -6,8 +6,7 @@ using UnityEngine;
 // MonoBehaviourPunCallbacksを継承すると、photonViewプロパティが使えるようになる
 public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
 {
-    [SerializeField]
-    private Projectile projectilePrefab = default;
+    private ProjectileManager projectileManager;
 
     private SpriteRenderer spriteRenderer;
     private float hue = 0f;
@@ -18,7 +17,8 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         ChangeBodyColor();
-        cam = Camera.main;
+        
+        projectileManager = GameObject.FindWithTag("ProjectileManager").GetComponent<ProjectileManager>();
     }
 
     private void Update() {
@@ -55,8 +55,7 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
     // 弾を発射するメソッド
     [PunRPC]
     private void FireProjectile(float angle) {
-        var projectile = Instantiate(projectilePrefab);
-        projectile.Init(transform.position, angle);
+       projectileManager.Fire(transform.position, angle);
     }
 
     // データを送受信するメソッド

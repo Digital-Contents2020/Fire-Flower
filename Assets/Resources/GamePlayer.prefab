@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: -4124266308927279402}
   - component: {fileID: 485574075951820540}
   - component: {fileID: 3079467923761030906}
+  - component: {fileID: -4176595151301913446}
+  - component: {fileID: -6742618331057813035}
   m_Layer: 0
   m_Name: GamePlayer
   m_TagString: Untagged
@@ -97,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff3c4f495ff53f4fb4c850c73ddde17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 4572060312503746607, guid: b1f60d2f169934e49b3bf5609fc7a9d6, type: 3}
 --- !u!114 &485574075951820540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,3 +138,40 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
+--- !u!50 &-4176595151301913446
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352947864438544828}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &-6742618331057813035
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352947864438544828}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
