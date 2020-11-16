@@ -47,12 +47,13 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
                 var dp = mouseWorldPosition - playerWorldPosition;
                 float angle = Mathf.Atan2(dp.y, dp.x);
 
-                FireProjectile(angle);
+                photonView.RPC(nameof(FireProjectile), RpcTarget.All, angle); 
             }
         }
     }
 
     // 弾を発射するメソッド
+    [PunRPC]
     private void FireProjectile(float angle) {
         var projectile = Instantiate(projectilePrefab);
         projectile.Init(transform.position, angle);
