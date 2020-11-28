@@ -1,10 +1,11 @@
 ﻿using Photon.Pun;
+using TMPro;
 using UnityEngine;
 
 public class GamePlayer : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private Bullet BulletPrefab = default; // BulletのPrefabの参照
+    private TextMeshPro nameLabel = default;
 
     private BulletManager bulletManager;
     private int bulletId = 0;
