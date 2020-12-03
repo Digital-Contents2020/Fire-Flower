@@ -1,4 +1,5 @@
 ﻿using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 
@@ -10,8 +11,13 @@ public class GamePlayer : MonoBehaviourPunCallbacks
     private BulletManager bulletManager;
     private int bulletId = 0;
 
+    public Player Owner => photonView.Owner;
+
     private void Awake() {
         bulletManager = GameObject.FindWithTag("BulletManager").GetComponent<BulletManager>();
+
+        var gamePlayerManager = GameObject.FindWithTag("GamePlayerManager").GetComponent<GamePlayerManager>();
+        transform.SetParent(gamePlayerManager.transform);
     }
 
     private void Update() {
