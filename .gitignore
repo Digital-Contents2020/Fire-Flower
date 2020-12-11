@@ -16,6 +16,11 @@
 # Uncomment this line if you wish to ignore the asset store tools plugin
 [Aa]ssets/AssetStoreTools*
 [Aa]ssets/Photon
+[Aa]ssets/Blue*Bullet
+[Aa]ssets/Plugins
+[Aa]ssets/UI/Script/trash
+[Aa]ssets/XR
+
 
 # TextMesh Pro files
 [Aa]ssets/TextMesh*Pro/
@@ -77,3 +82,6 @@ test1/
 test.app/
 
 upload/
+
+#script
+kasoku.cs

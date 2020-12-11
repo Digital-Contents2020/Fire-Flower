@@ -1,0 +1,45 @@
+Production: Ryuban
+
+Thank you for purchasing Sparkle Kouka -Sparkle Kouka-.
+Please read the installation instructions and specifications carefully and be careful with fire.
+
+-Installation instructions.
+(1)You can import VRCSDK2 and set up the world.
+   If you import Dynamic Bone, it will make the sparklers buzz.
+　 We recommend that you set up the Bloom in the world side with PPSV2.
+
+(2)Unitypackarge of Sparkler Kouka is imported.
+   Put the following into Hierarchy from Sparkler→Prefab in Assets.
+(3)Place the following in Hierarcy from Sparkler→Prefab in Assets. But only 4 lights can be drawn at the same time.
+   The one with "NoLight" doesn't have a real light.
+
+Sparkler...A sparkler. Sparkler...A sparkler that ignites when it hits a set particle.
+If you soak it in water after it's lit, it resets and respawns. The respawn target is the original position.
+
+SeedFire...There are two types of candles and mini bucket candles. These are for igniting sparklers.
+Hold this candle and interact with it to ignite it, or interact without holding it to extinguish it.
+If you use your own particles to light the fire, please use the enclosed image as the basis for setting up the Particle System.
+Even if you set your avatar, it will have an effect.
+
+Bucket....Put a sparkler that has burned out or is still lit in water to put it out.
+After a short time after you put it in, the sparkler will return to its original position and you can light it.
+The bucket will shake while you hold it.
+The Sparkler reacts to the collider on the Water layer.
+
+(4)To use, hold the tip of the sparkler close to the fire to light it. When it burns out, the tip is gone.
+   If the sparkler is firmly dipped in a bucket of water, it will respawn in about 3 seconds and be ready to ignite again.
+   Be sure to soak the extinguished sparkler in water due to its high temperature.
+
+
+Note: The tip is glowing when placed in Hierarcy, but this is not a defect.
+Note: Mis-synchronization and counter-prescription
+Friends who have joined a world instance with the fire lit or gone are
+It appears to be unlit.
+
+The sparklers in this case may not be lit even if a later user uses it and respawns it.
+
+When used by someone already in the world (or the last user among them), the sparklers will light and return to their original state.
+To avoid this, be sure to soak it in water and respawn or reset it after use.
+
+
+Translated with www.DeepL.com/Translator (free version)
