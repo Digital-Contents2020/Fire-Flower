@@ -7,6 +7,7 @@ public class GamePlayer : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private TextMeshPro nameLabel = default;
+    private Rigidbody rb = null;
 
     private BulletManager bulletManager;
     private int bulletId = 0;
@@ -15,6 +16,7 @@ public class GamePlayer : MonoBehaviourPunCallbacks
 
     private void Awake() {
         bulletManager = GameObject.FindWithTag("BulletManager").GetComponent<BulletManager>();
+        rb = GetComponent<Rigidbody>();
 
         var gamePlayerManager = GameObject.FindWithTag("GamePlayerManager").GetComponent<GamePlayerManager>();
         transform.SetParent(gamePlayerManager.transform);
@@ -22,9 +24,10 @@ public class GamePlayer : MonoBehaviourPunCallbacks
 
     private void Update() {
         if (photonView.IsMine) {
-            var direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
-            var dv = 6f * Time.deltaTime * direction;
-            transform.Translate(dv.x, dv.y, 0f);
+            var direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0).normalized;
+            Debug.Log(direction);
+            var dv = 6f * direction;
+            rb.velocity = new Vector3(dv.x, dv.y, 0f);
 
             // 左クリックでカーソルの方向に弾を発射する処理を行う
             if (Input.GetMouseButtonDown(0)) {
