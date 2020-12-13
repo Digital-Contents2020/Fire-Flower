@@ -3,65 +3,140 @@ using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 
-public class GamePlayer : MonoBehaviourPunCallbacks
+public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
 {
+    [SerializeField]
+    GameObject particle;
+
     [SerializeField]
     private TextMeshPro nameLabel = default;
     private Rigidbody rb = null;
 
-    private BulletManager bulletManager;
-    private int bulletId = 0;
-
     public Player Owner => photonView.Owner;
 
+    Vector3 defaultPos;
+    Vector3 prevPos;
+
+    //パーティクルたち
+    MeshRenderer mr;
+    float fadeSpeed = 0.02f;
+    float alfa;
+
+
+    //フラグ
+    bool isActive = false;
+    bool isFadeIn = false;
+    bool isFadeOut = false;
+    bool isRespawn = false;
+
+
     private void Awake() {
-        bulletManager = GameObject.FindWithTag("BulletManager").GetComponent<BulletManager>();
-        rb = GetComponent<Rigidbody>();
 
         var gamePlayerManager = GameObject.FindWithTag("GamePlayerManager").GetComponent<GamePlayerManager>();
         transform.SetParent(gamePlayerManager.transform);
     }
 
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        isActive = true;
+        
+        mr = GetComponent<MeshRenderer>();
+        alfa = mr.material.color.a;
+        particle.SetActive(false);
+        
+    }
+
     private void Update() {
-        if (photonView.IsMine) {
+        if (photonView.IsMine && isActive) {
             var direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0).normalized;
-            Debug.Log(direction);
+            // Debug.Log(direction);
             var dv = 6f * direction;
             rb.velocity = new Vector3(dv.x, dv.y, 0f);
 
-            // 左クリックでカーソルの方向に弾を発射する処理を行う
-            if (Input.GetMouseButtonDown(0)) {
-                var playerWorldPosition = transform.position;
-                var mousePos = Input.mousePosition;
-                mousePos.z = 10.0f;
-                var mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePos);
-                var dp = mouseWorldPosition - playerWorldPosition;
-                float angle = Mathf.Atan2(dp.y, dp.x);
-
-                // FireBullet(angle)をRPCで実行する
-                photonView.RPC(nameof(FireBullet), RpcTarget.All, transform.position, angle);
+            if(Input.GetKeyDown("t")){
+                Debug.Log("press t");
+                photonView.RPC(nameof(Ignition), RpcTarget.All);
+            }
+            if(Input.GetKeyDown("f")){
+                Debug.Log("press f");
+                isFadeOut = true;
             }
         }
-    }
-    
-    // 弾を発射するメソッド
-    [PunRPC]
-    private void FireBullet(Vector3 origin, float angle, PhotonMessageInfo info)  {
-        int timestamp = info.SentServerTimestamp;
-        bulletManager.Fire(timestamp, photonView.OwnerActorNr, origin, angle, timestamp);
+
+        if(isFadeOut) FadeOut();
+        if(isFadeIn) FadeIn();
+        if(isRespawn) Respawn();
     }
 
-    private void OnTriggerEnter(Collider collision) {
+    // データを送受信するメソッド
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+        if (stream.IsWriting) {
+            // 自身側が生成したオブジェクトの場合は
+            // 色相値と移動中フラグのデータを送信する
+            stream.SendNext(isFadeOut);
+            stream.SendNext(isFadeIn);
+            stream.SendNext(isRespawn);
+        } else {
+            // 他プレイヤー側が生成したオブジェクトの場合は
+            // 受信したデータから色相値と移動中フラグを更新する
+            isFadeOut = (bool)stream.ReceiveNext();
+            isFadeIn = (bool)stream.ReceiveNext();
+            isRespawn = (bool)stream.ReceiveNext();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
         if (photonView.IsMine) {
-            var bullet = collision.GetComponent<Bullet>();
-            if (bullet != null && bullet.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber) {
-                photonView.RPC(nameof(HitByBullet), RpcTarget.All, bullet.Id, bullet.OwnerId);
+            if(other.tag == "Fire"){
+                photonView.RPC(nameof(Ignition), RpcTarget.All);
             }
+            else if(other.tag == "Water"){
+                photonView.RPC(nameof(BurnOut), RpcTarget.All);
+            }
+        }
+    } 
+
+
+    //火が付いたとき
+    [PunRPC]
+    void Ignition(){
+        particle.SetActive(true);
+    }
+
+    // 火が消えたとき
+    [PunRPC]
+    void BurnOut(){
+        particle.SetActive(false);
+        isActive = false;
+        if(!isRespawn) isFadeOut=true;
+    }
+
+    //リスポーン処理
+    void Respawn(){
+        transform.position = defaultPos;
+        this.gameObject.SetActive(true);
+        isFadeIn = true;
+        isRespawn = false;
+    }
+
+    //フェードアウト
+    public void FadeOut(){
+        alfa = alfa - fadeSpeed;
+        mr.material.color = mr.material.color - new Color(0,0,0,fadeSpeed);
+        if(alfa <= 0f){
+            isFadeOut = false;
+            isRespawn = true;
         }
     }
 
-    [PunRPC]
-    private void HitByBullet(int bulletId, int ownerId) {
-        bulletManager.Remove(bulletId, ownerId);
-    }  
+    //フェードイン
+    public void FadeIn(){
+        alfa = alfa + fadeSpeed;
+        mr.material.color = mr.material.color + new Color(0,0,0,fadeSpeed);
+        if(alfa >= 1f){
+            isFadeIn = false;
+            isActive = true;
+        }
+    }
 }

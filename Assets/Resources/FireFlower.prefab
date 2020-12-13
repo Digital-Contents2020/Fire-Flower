@@ -4777,7 +4777,7 @@ ParticleSystem:
   cullingMode: 1
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -28548,7 +28548,7 @@ ParticleSystem:
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -47863,6 +47863,7 @@ GameObject:
   - component: {fileID: -7694219379040430741}
   - component: {fileID: 4411129885735019518}
   - component: {fileID: -574988046066115722}
+  - component: {fileID: 960761405216437677}
   m_Layer: 0
   m_Name: FireFlower
   m_TagString: Untagged
@@ -48069,6 +48070,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: -7694219379040430741}
+  - {fileID: 4411129885735019518}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -48099,6 +48101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff3c4f495ff53f4fb4c850c73ddde17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particle: {fileID: 1092386650086756}
   nameLabel: {fileID: 0}
 --- !u!54 &-574988046066115722
 Rigidbody:
@@ -48116,6 +48119,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!65 &960761405216437677
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803360852447282}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.22469684, y: 0.050654545, z: 0.26}
+  m_Center: {x: 0, y: 0, z: 0.05}
 --- !u!1 &1894292128051894
 GameObject:
   m_ObjectHideFlags: 0
