@@ -4,28 +4,18 @@ using UnityEngine;
 
 public class Test_Anim : MonoBehaviour
 {
-    Animator animator;
-    int trans;
+    ParticleSystem particle;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
-        trans = animator.GetInteger("trans");
+       particle = GetComponent<ParticleSystem>();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow)){
-            trans++;
-            Debug.Log(trans);
+        if(particle.isStopped){
+            Debug.Log("stop");
         }
-        else if(Input.GetKeyDown(KeyCode.DownArrow)){
-            trans--;
-            
-            Debug.Log(trans);
-        }
-
-        animator.SetInteger("trans", trans);
     }
 }

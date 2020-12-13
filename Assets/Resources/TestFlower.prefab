@@ -4736,6 +4736,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4770136767638456}
+  - component: {fileID: 8101024589326907919}
   - component: {fileID: 198689950173437968}
   - component: {fileID: 199295936806784890}
   m_Layer: 0
@@ -4763,6 +4764,18 @@ Transform:
   m_Father: {fileID: 4876889568818736}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8101024589326907919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092386650086756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bacf87bd9087b634d8197dbddecaf4e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198689950173437968
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -47963,6 +47976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 650327f0b6e834e4dbdb54ce754515ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particle: {fileID: 0}
 --- !u!82 &82016153763914256
 AudioSource:
   m_ObjectHideFlags: 0
