@@ -42,7 +42,7 @@ public class SceneManager : MonoBehaviourPunCallbacks {
     public override void OnJoinedRoom () {
         Debug.Log("joinroiom");
         // マッチング後、ランダムな位置に自分自身のネットワークオブジェクトを生成する
-        var v = new Vector3 (Random.Range (-3f, 3f), Random.Range (-3f, 3f));
+        var v = new Vector3 (Random.Range (-3f, 3f), Random.Range (-2.5f, 2.5f));
         var r = new Quaternion(90,0,0,0);
         PhotonNetwork.Instantiate ("FireFlower", v, Quaternion.Euler(-90f,0f,0f));
 
