@@ -17,8 +17,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scenes/DemoAsteroids-GameScene.unity
     guid: 98efc37d6307844488eb3e4247dde7e9
-  - enabled: 1
-    path: Assets/Scenes/Login.unity
+  - enabled: 0
+    path: Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scenes/DemoAsteroids-LobbyScene.unity
     guid: c8a9d1312a49dc8488a9b32d83d659c7
   - enabled: 0
     path: Assets/Photon/PhotonUnityNetworking/Demos/DemoProcedural/Procedural-Scene.unity
@@ -51,12 +51,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Photon/PhotonUnityNetworking/Demos/DemoSlotRacer/SlotCar-Scene.unity
     guid: 711b38c07f2cf904f81b3422c67f1825
-<<<<<<< HEAD
+  - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: d92bb070b0e6943479c79e29c2c0722f
   - enabled: 1
     path: Assets/Scenes/Main.unity
-=======
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
->>>>>>> UI2
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: d9b3cb3dfc6df4ef69253124e016992f
   m_configObjects: {}
