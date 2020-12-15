@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    string scene_Login = "Login"; 
+    string scene_Main = "Main"; 
+    string scene_End = "End"; 
+ 
+    public static void ChangeScene(){ 
+        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name); 
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Login"){ 
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Main"); 
+        } 
+        else if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Main"){ 
+            UnityEngine.SceneManagement.SceneManager.LoadScene("End"); 
+        } 
+        else if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "End"){ 
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Login"); 
+        } 
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -9,7 +9,7 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
     GameObject particle;
 
     [SerializeField]
-    private TextMeshPro nameLabel = default;
+    private Text nameLabel = default;
     private Rigidbody rb = null;
 
     public Player Owner => photonView.Owner;
@@ -38,6 +38,8 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
+        nameLabel.text = photonView.Owner.NickName;
+
         rb = GetComponent<Rigidbody>();
         isActive = true;
         

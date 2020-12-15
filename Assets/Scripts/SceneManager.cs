@@ -1,14 +1,35 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.UI;
 
 // MonoBehaviourではなくMonoBehaviourPunCallbacksを継承して、Photonのコールバックを受け取れるようにする
 public class SceneManager : MonoBehaviourPunCallbacks {
+
+    private static SceneManager instance = null;
+
+    [SerializeField] InputField PlayerNameInput = default;
+
+    private void Awake() {
+        if(instance == null)
+         {
+             instance = this;
+             DontDestroyOnLoad(this.gameObject); 
+         }
+         else
+         {
+             Destroy(this.gameObject);
+         }
+    }
+
     private void Start () {
         // PhotonServerSettingsに設定した内容を使ってマスターサーバーへ接続する
-        PhotonNetwork.ConnectUsingSettings ();
-        PhotonNetwork.LocalPlayer.NickName = "Player";
+        //PhotonNetwork.ConnectUsingSettings ();
+        //PhotonNetwork.LocalPlayer.NickName = "Player";
+
+        PlayerNameInput.text = "Player " + Random.Range(1000, 10000);
     }
+
 
     // マスターサーバーへの接続が成功した時に呼ばれるコールバック
     public override void OnConnectedToMaster () {
@@ -29,4 +50,21 @@ public class SceneManager : MonoBehaviourPunCallbacks {
             PhotonNetwork.CurrentRoom.SetStartTime (PhotonNetwork.ServerTimestamp);
         }
     }
+
+    public void OnLoginButtonClicked()
+        {
+            string playerName = PlayerNameInput.text;
+
+            if (!playerName.Equals(""))
+            {
+                PhotonNetwork.LocalPlayer.NickName = playerName;
+                PhotonNetwork.ConnectUsingSettings();
+
+                LoadScene.ChangeScene();
+            }
+            else
+            {
+                Debug.LogError("Player Name is invalid.");
+            }
+        }
 }
