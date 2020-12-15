@@ -33,6 +33,7 @@ public class SceneManager : MonoBehaviourPunCallbacks {
 
     // マスターサーバーへの接続が成功した時に呼ばれるコールバック
     public override void OnConnectedToMaster () {
+        Debug.Log("connectmaster");
         string displayName = $"{PhotonNetwork.NickName}の部屋";
         // "room"という名前のルームに参加する（ルームが無ければ作成してから参加する）
         PhotonNetwork.JoinOrCreateRoom ("room", GameRoomProperty.CreateRoomOptions (displayName), TypedLobby.Default);
@@ -40,6 +41,7 @@ public class SceneManager : MonoBehaviourPunCallbacks {
 
     // マッチングが成功した時に呼ばれるコールバック
     public override void OnJoinedRoom () {
+        Debug.Log("joinroiom");
         // マッチング後、ランダムな位置に自分自身のネットワークオブジェクトを生成する
         var v = new Vector3 (Random.Range (-3f, 3f), Random.Range (-3f, 3f));
         var r = new Quaternion(90,0,0,0);
@@ -51,20 +53,25 @@ public class SceneManager : MonoBehaviourPunCallbacks {
         }
     }
 
-    public void OnLoginButtonClicked()
+    public void OnLoginButtonClicked(){
+        string playerName = PlayerNameInput.text;
+
+        if (!playerName.Equals(""))
         {
-            string playerName = PlayerNameInput.text;
-
-            if (!playerName.Equals(""))
-            {
-                PhotonNetwork.LocalPlayer.NickName = playerName;
-                PhotonNetwork.ConnectUsingSettings();
-
-                LoadScene.ChangeScene();
-            }
-            else
-            {
-                Debug.LogError("Player Name is invalid.");
-            }
+            PhotonNetwork.LocalPlayer.NickName = playerName;
+            PhotonNetwork.ConnectUsingSettings();
         }
+        else
+        {
+            Debug.LogError("Player Name is invalid.");
+        }
+    }
+
+    public void OnEndButtonClicked(){
+        LoadScene.ChangeScene();
+    }
+
+    public void OnTitleButtonClicked(){
+        LoadScene.ChangeScene();
+    }
 }

@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-       public static void ChangeScene(){ 
+    public static void ChangeScene(){ 
         Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name); 
         if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Login"){ 
             UnityEngine.SceneManagement.SceneManager.LoadScene("Main"); 
