@@ -16,6 +16,16 @@
 # Uncomment this line if you wish to ignore the asset store tools plugin
 [Aa]ssets/AssetStoreTools*
 [Aa]ssets/Photon
+[Aa]ssets/Plugins
+[Aa]ssets/Blue*Bullet
+[Aa]ssets/Fantasy*Skybox*FREE
+[Aa]ssets/UI/Script/trash
+[Aa]ssets/Scripts/Kasoku.cs
+[Aa]ssets/UI/Script/Sound
+[Aa]ssets/XR
+[Aa]ssets/Fantasy Skybox FREE*
+
+
 
 # TextMesh Pro files
 [Aa]ssets/TextMesh*Pro/
@@ -78,4 +88,6 @@ test.app/
 
 upload/
 
+login2/
 .DS_Store
+login/
