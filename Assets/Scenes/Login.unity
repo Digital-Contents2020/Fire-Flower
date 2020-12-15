@@ -38719,6 +38719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d96b1194660734da4519799507456f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerNameInput: {fileID: 328590478}
 --- !u!4 &1616035653
 Transform:
   m_ObjectHideFlags: 0
@@ -44131,7 +44132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1dcb68458e1e54e8f6bb5312b01d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNameInput: {fileID: 0}
 --- !u!1 &1776772160
 GameObject:
   m_ObjectHideFlags: 0

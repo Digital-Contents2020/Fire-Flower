@@ -6,9 +6,9 @@ using UnityEngine.UI;
 // MonoBehaviourではなくMonoBehaviourPunCallbacksを継承して、Photonのコールバックを受け取れるようにする
 public class SceneManager : MonoBehaviourPunCallbacks {
 
-    private static SceneManager instance = null;
+    public static SceneManager instance = null;
 
-    [SerializeField] InputField PlayerNameInput = default;
+    
 
     private void Awake() {
         if(instance == null)
@@ -27,7 +27,6 @@ public class SceneManager : MonoBehaviourPunCallbacks {
         //PhotonNetwork.ConnectUsingSettings ();
         //PhotonNetwork.LocalPlayer.NickName = "Player";
 
-        PlayerNameInput.text = "Player " + Random.Range(1000, 10000);
     }
 
 
@@ -53,8 +52,14 @@ public class SceneManager : MonoBehaviourPunCallbacks {
         }
     }
 
-    public void OnLoginButtonClicked(){
-        string playerName = PlayerNameInput.text;
+    public override void OnLeftRoom()
+    {
+        Debug.Log("left room");
+        
+    }
+
+    public void OnLoginButtonClicked(string name){
+        string playerName = name;
 
         if (!playerName.Equals(""))
         {
@@ -68,10 +73,11 @@ public class SceneManager : MonoBehaviourPunCallbacks {
     }
 
     public void OnEndButtonClicked(){
-        LoadScene.ChangeScene();
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
+        
     }
 
     public void OnTitleButtonClicked(){
-        LoadScene.ChangeScene();
     }
 }

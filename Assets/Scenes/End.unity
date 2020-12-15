@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d96b1194660734da4519799507456f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerNameInput: {fileID: 0}
 --- !u!4 &1235089310
 Transform:
   m_ObjectHideFlags: 0
@@ -476,6 +477,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7586491419855829916, guid: a3d2fdab8a83d4ed89f14aab0ecaffe1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7586491419855829918, guid: a3d2fdab8a83d4ed89f14aab0ecaffe1, type: 3}
       propertyPath: m_Name
       value: CaptureCamera
