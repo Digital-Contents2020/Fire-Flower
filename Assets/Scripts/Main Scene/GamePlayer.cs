@@ -47,7 +47,6 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
         mr = GetComponent<MeshRenderer> ();
         alfa = mr.material.color.a;
         particle.SetActive (false);
-
     }
 
     private void Update () {
@@ -60,9 +59,9 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
             //     Mathf.Clamp( transform.position.x - dv.x, -2.5f,2.5f), 
             //     Mathf.Clamp( transform.position.y - dv.y, -6f,6f), 
             //     0f 
-            // ); 
+            // );
 
-            // ターゲット端末の縦横の表示に合わせてremapする 
+            // ターゲット端末の縦横の表示に合わせてremapする
             dir.x = -Input.acceleration.x;
             dir.y = -Input.acceleration.y;
 
@@ -78,8 +77,6 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
                 Mathf.Clamp (transform.position.y - dir.y, -6f, 6f),
                 0f
             );
-
-            //rb.velocity = new Vector3(dv.x, dv.y, 0f);
 
             // if (Input.GetKeyDown ("t")) {
             //     Debug.Log ("press t");
