@@ -20,6 +20,7 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
     Vector3 defaultPos;
     Vector3 prevPos;
     Vector3 dir = Vector3.zero;
+    private Gyroscope m_gyro;
 
     //パーティクルたち
     MeshRenderer mr;
@@ -63,8 +64,11 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
             // ); 
 
             // ターゲット端末の縦横の表示に合わせてremapする 
-            dir.x = -Input.acceleration.x;
-            dir.y = -Input.acceleration.y;
+            // dir.x = -Input.acceleration.x;
+            // dir.y = -Input.acceleration.y;
+            m_gyro = Input.gyro;
+            dir.x = m_gyro.attitude.x;
+            dir.y = m_gyro.attitude.y;
 
             accel.text = "x:" + dir.x + ", y:" + dir.y;
 
