@@ -86,3 +86,6 @@ test1/
 test.app/
 
 upload/
+
+.DS_Store/
+.DS_Store
