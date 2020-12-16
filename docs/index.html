@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
-    
-    <button onclick="deviceMotionRequest()">Click</button>
+    <button onclick="deviceMotionRequest()">動作と方向へのアクセスの許可</button>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas"></canvas>
       <div id="unity-loading-bar">
@@ -27,24 +26,7 @@
     <script>
       function deviceMotionRequest() {
             if (DeviceMotionEvent.requestPermission) {
-                DeviceMotionEvent.requestPermission()
-                    .then(permissionState => {
-                        if (permissionState === 'granted') {
-                            window.addEventListener("devicemotion", function (event) {
-                                if (!event.accelerationIncludingGravity) {
-                                    alert('event.accelerationIncludingGravity is null');
-                                    return;
-                                }
-                                document.getElementById('x').innerHTML = event.accelerationIncludingGravity
-                                    .x;
-                                document.getElementById('y').innerHTML = event.accelerationIncludingGravity
-                                    .y;
-                                document.getElementById('z').innerHTML = event.accelerationIncludingGravity
-                                    .z;
-                            })
-                        }
-                    })
-                    .catch(console.error);
+                DeviceMotionEvent.requestPermission();
             } else {
                 alert('DeviceMotionEvent.requestPermission is not found')
             }
