@@ -10,8 +10,8 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField]
     private Text nameLabel = default;
 
-    [SerializeField]
-    private Text accel = default;
+    // [SerializeField]
+    // private Text accel = default;
 
     private Rigidbody rb = null;
 
@@ -20,7 +20,6 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
     Vector3 defaultPos;
     Vector3 prevPos;
     Vector3 dir = Vector3.zero;
-    private Gyroscope m_gyro;
 
     //パーティクルたち
     MeshRenderer mr;
@@ -48,7 +47,6 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
         mr = GetComponent<MeshRenderer> ();
         alfa = mr.material.color.a;
         particle.SetActive (false);
-
     }
 
     private void Update () {
@@ -61,16 +59,13 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
             //     Mathf.Clamp( transform.position.x - dv.x, -2.5f,2.5f), 
             //     Mathf.Clamp( transform.position.y - dv.y, -6f,6f), 
             //     0f 
-            // ); 
+            // );
 
-            // ターゲット端末の縦横の表示に合わせてremapする 
-            // dir.x = -Input.acceleration.x;
-            // dir.y = -Input.acceleration.y;
-            m_gyro = Input.gyro;
-            dir.x = m_gyro.attitude.x;
-            dir.y = m_gyro.attitude.y;
+            // ターゲット端末の縦横の表示に合わせてremapする
+            dir.x = -Input.acceleration.x;
+            dir.y = -Input.acceleration.y;
 
-            accel.text = "x:" + dir.x + ", y:" + dir.y;
+            //accel.text = "x:" + dir.x + ", y:" + dir.y;
 
             if (dir.sqrMagnitude > 1)
                 dir.Normalize ();
@@ -83,16 +78,14 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
                 0f
             );
 
-            //rb.velocity = new Vector3(dv.x, dv.y, 0f);
-
-            if (Input.GetKeyDown ("t")) {
-                Debug.Log ("press t");
-                photonView.RPC (nameof (Ignition), RpcTarget.All);
-            }
-            if (Input.GetKeyDown ("f")) {
-                Debug.Log ("press f");
-                isFadeOut = true;
-            }
+            // if (Input.GetKeyDown ("t")) {
+            //     Debug.Log ("press t");
+            //     photonView.RPC (nameof (Ignition), RpcTarget.All);
+            // }
+            // if (Input.GetKeyDown ("f")) {
+            //     Debug.Log ("press f");
+            //     isFadeOut = true;
+            // }
         }
 
         if (isFadeOut) FadeOut ();
