@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
-    [SerializeField]
-    GameObject particle;
+    [SerializeField] GameObject particle;
 
-    [SerializeField]
-    private Text nameLabel = default;
+    [SerializeField] Text nameLabel = default;
+    //[SerializeField] 
 
     // [SerializeField]
     // private Text accel = default;
@@ -53,9 +52,9 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
 
     private void Update () {
         if (photonView.IsMine && isActive) {
-            // var direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0).normalized; 
-            // // Debug.Log(direction); 
-            // var dv = -Time.deltaTime * 2f * direction; 
+            var direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0).normalized; 
+            // Debug.Log(direction); 
+            var dv = -Time.deltaTime * 2f * direction; 
 
             // transform.position = new Vector3( 
             //     Mathf.Clamp( transform.position.x - dv.x, -2.5f,2.5f), 
@@ -65,29 +64,26 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
 
             // ターゲット端末の縦横の表示に合わせてremapする 
             dir.x = -Input.acceleration.x;
-            dir.y = -Input.acceleration.z;
+            dir.y = -Input.acceleration.y;
 
             // accel.text = "x:" + dir.x + ", y:" + dir.y;
 
-            if (dir.sqrMagnitude > 1)
-                dir.Normalize ();
+            // if (dir.sqrMagnitude > 1)
+            //     dir.Normalize ();
 
-            dir *= Time.deltaTime * 2f;
+            // dir *= Time.deltaTime * 2f;
 
-            transform.position = new Vector3 (
-                Mathf.Clamp (transform.position.x - dir.x, -2.5f, 2.5f),
-                Mathf.Clamp (transform.position.y - dir.y, -6f, 6f),
-                0f
-            );
+            // transform.position = new Vector3 (
+            //     Mathf.Clamp (transform.position.x - dir.x, -2.5f, 2.5f),
+            //     Mathf.Clamp (transform.position.y - dir.y, -6f, 6f),
+            //     0f
+            // );
 
-            // if (Input.GetKeyDown ("t")) {
-            //     Debug.Log ("press t");
-            //     photonView.RPC (nameof (Ignition), RpcTarget.All);
-            // }
-            // if (Input.GetKeyDown ("f")) {
-            //     Debug.Log ("press f");
-            //     isFadeOut = true;
-            // }
+            // nameLabel.transform.position = new Vector3 (
+            //     Mathf.Clamp (nameLabel.transform.position.x - dir.x, -2.5f, 2.5f),
+            //     Mathf.Clamp (nameLabel.transform.position.y - dir.y, -6f, 6f),
+            //     0f
+            // );
         }
 
         if (isFadeOut) FadeOut ();
