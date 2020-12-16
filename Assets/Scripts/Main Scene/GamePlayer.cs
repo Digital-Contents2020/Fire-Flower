@@ -63,7 +63,7 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
             // ); 
 
             // ターゲット端末の縦横の表示に合わせてremapする 
-            dir.x = Input.acceleration.x;
+            dir.x = -Input.acceleration.x;
             dir.y = -Input.acceleration.y;
 
             accel.text = "x:" + dir.x + ", y:" + dir.y;
