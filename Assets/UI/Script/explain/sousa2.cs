@@ -7,6 +7,7 @@ public class sousa2 : MonoBehaviour
 {
     public GameObject panel;
     public GameObject button;
+    public GameObject loginpanel;
     void Start()
     {
         //panel.SetActive(false);
@@ -16,6 +17,7 @@ public class sousa2 : MonoBehaviour
         Debug.Log ("Return clicked2");
         panel.SetActive(true);
         button.SetActive(true);
+        loginpanel.SetActive(false);
     }
    
 }
