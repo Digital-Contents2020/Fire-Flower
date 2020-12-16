@@ -13,7 +13,7 @@ public class TouchKeyBoard : MonoBehaviour
 
     private void Update() {
         if(keyboard != null && keyboard.status == TouchScreenKeyboard.Status.Done){
-
+            Debug.Log("input:"+keyboard.text);
         }
     }
 
