@@ -1,7 +1,7 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -9,7 +9,7 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
     GameObject particle;
 
     [SerializeField]
-    private TextMeshPro nameLabel = default;
+    private Text nameLabel = default;
     private Rigidbody rb = null;
 
     public Player Owner => photonView.Owner;
@@ -38,6 +38,8 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
+        nameLabel.text = photonView.Owner.NickName;
+
         rb = GetComponent<Rigidbody>();
         isActive = true;
         
@@ -51,8 +53,15 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
         if (photonView.IsMine && isActive) {
             var direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0).normalized;
             // Debug.Log(direction);
-            var dv = 6f * direction;
-            rb.velocity = new Vector3(dv.x, dv.y, 0f);
+            var dv = -Time.deltaTime * 2f * direction;
+
+            transform.position = new Vector3(
+                Mathf.Clamp( transform.position.x - dv.x, -2.5f,2.5f),
+                Mathf.Clamp( transform.position.y - dv.y, -6f,6f),
+                0f
+            );
+            
+            //rb.velocity = new Vector3(dv.x, dv.y, 0f);
 
             if(Input.GetKeyDown("t")){
                 Debug.Log("press t");
@@ -92,7 +101,9 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable
                 photonView.RPC(nameof(Ignition), RpcTarget.All);
             }
             else if(other.tag == "Water"){
-                photonView.RPC(nameof(BurnOut), RpcTarget.All);
+                if(particle.activeSelf){
+                    photonView.RPC(nameof(BurnOut), RpcTarget.All);
+                }
             }
         }
     } 

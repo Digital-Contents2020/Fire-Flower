@@ -1,23 +1,33 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LoadScene : MonoBehaviour {
+public class LoadScene : MonoBehaviour
+{
+    [SerializeField] InputField PlayerNameInput = default;
 
-    string scene_Login = "Login";
-    string scene_Main = "Main";
-    string scene_End = "End";
+    private void Start() {
+        if(PlayerNameInput != null){
+            PlayerNameInput.text = "Player " + Random.Range(1000, 10000);
+        }
+    }
 
-    public void ChangeScene(){
-        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == scene_Login){
-            UnityEngine.SceneManagement.SceneManager.LoadScene(scene_Main);
-        }
-        else if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == scene_Main){
-            UnityEngine.SceneManagement.SceneManager.LoadScene(scene_End);
-        }
-        else if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == scene_End){
-            UnityEngine.SceneManagement.SceneManager.LoadScene(scene_Login);
-        }
-        
+    public void ChangeScene(){ 
+        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name); 
+
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Login"){ 
+            Debug.Log(PlayerNameInput.text);
+
+            SceneManager.instance.OnLoginButtonClicked(PlayerNameInput.text);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Main"); 
+            
+        } 
+        else if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Main"){ 
+            SceneManager.instance.OnEndButtonClicked();
+            UnityEngine.SceneManagement.SceneManager.LoadScene("End"); 
+        } 
+        else if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "End"){ 
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Login"); 
+        } 
     }
 }
