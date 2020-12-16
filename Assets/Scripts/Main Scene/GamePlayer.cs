@@ -15,11 +15,11 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
 
     private Rigidbody rb = null;
 
-    public Player Owner => photonView.Owner;
-
     Vector3 defaultPos;
     Vector3 prevPos;
     Vector3 dir = Vector3.zero;
+
+    AudioSource particleSound;
 
     //パーティクルたち
     MeshRenderer mr;
@@ -40,6 +40,8 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
 
     void Start () {
         nameLabel.text = photonView.Owner.NickName;
+
+        particleSound = GetComponent<AudioSource> ();
 
         rb = GetComponent<Rigidbody> ();
         isActive = true;
@@ -63,7 +65,7 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
 
             // ターゲット端末の縦横の表示に合わせてremapする 
             dir.x = -Input.acceleration.x;
-            dir.y = -Input.acceleration.y;
+            dir.y = -Input.acceleration.z;
 
             // accel.text = "x:" + dir.x + ", y:" + dir.y;
 
@@ -126,6 +128,7 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
     [PunRPC]
     void Ignition () {
         particle.SetActive (true);
+        particleSound.Play ();
     }
 
     // 火が消えたとき
@@ -134,6 +137,7 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
         particle.SetActive (false);
         isActive = false;
         if (!isRespawn) isFadeOut = true;
+        particleSound.Stop ();
     }
 
     //リスポーン処理
