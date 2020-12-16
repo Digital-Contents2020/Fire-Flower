@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
-    <button onclick="deviceMotionRequest()">動作と方向へのアクセスの許可</button>
+    <button onclick="deviceMotionRequest()">動作と方向へのアクセス許可</button>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas"></canvas>
       <div id="unity-loading-bar">
@@ -16,9 +16,6 @@
         <div id="unity-progress-bar-empty">
           <div id="unity-progress-bar-full"></div>
         </div>
-      </div>
-      <div>
-        <button>動作と方向へのアクセス許可</button>
       </div>
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
@@ -28,12 +25,12 @@
     </div>
     <script>
       function deviceMotionRequest() {
-            if (DeviceMotionEvent.requestPermission) {
-                DeviceMotionEvent.requestPermission();
-            } else {
-                alert('DeviceMotionEvent.requestPermission is not found')
-            }
-        }
+          if (DeviceOrientationEvent.requestPermission) {
+              DeviceOrientationEvent.requestPermission();
+          } else {
+              alert('DeviceMotionEvent.requestPermission is not found')
+          }
+      }
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/deploy.loader.js";
       var config = {
