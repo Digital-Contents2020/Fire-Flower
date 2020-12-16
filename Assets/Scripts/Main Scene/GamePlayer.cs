@@ -10,8 +10,8 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField]
     private Text nameLabel = default;
 
-    [SerializeField]
-    private Text accel = default;
+    // [SerializeField]
+    // private Text accel = default;
 
     private Rigidbody rb = null;
 
@@ -64,13 +64,10 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
             // ); 
 
             // ターゲット端末の縦横の表示に合わせてremapする 
-            // dir.x = -Input.acceleration.x;
-            // dir.y = -Input.acceleration.y;
-            m_gyro = Input.gyro;
-            dir.x = m_gyro.attitude.x;
-            dir.y = m_gyro.attitude.y;
+            dir.x = -Input.acceleration.x;
+            dir.y = -Input.acceleration.y;
 
-            accel.text = "x:" + dir.x + ", y:" + dir.y;
+            // accel.text = "x:" + dir.x + ", y:" + dir.y;
 
             if (dir.sqrMagnitude > 1)
                 dir.Normalize ();
