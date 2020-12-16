@@ -10,8 +10,8 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField]
     private Text nameLabel = default;
 
-    [SerializeField]
-    private Text accel = default;
+    // [SerializeField]
+    // private Text accel = default;
 
     private Rigidbody rb = null;
 
@@ -63,10 +63,10 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
             // ); 
 
             // ターゲット端末の縦横の表示に合わせてremapする 
-            dir.x = Input.acceleration.x;
+            dir.x = -Input.acceleration.x;
             dir.y = -Input.acceleration.y;
 
-            accel.text = "x:" + dir.x + ", y:" + dir.y;
+            //accel.text = "x:" + dir.x + ", y:" + dir.y;
 
             if (dir.sqrMagnitude > 1)
                 dir.Normalize ();
@@ -81,14 +81,14 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
 
             //rb.velocity = new Vector3(dv.x, dv.y, 0f);
 
-            if (Input.GetKeyDown ("t")) {
-                Debug.Log ("press t");
-                photonView.RPC (nameof (Ignition), RpcTarget.All);
-            }
-            if (Input.GetKeyDown ("f")) {
-                Debug.Log ("press f");
-                isFadeOut = true;
-            }
+            // if (Input.GetKeyDown ("t")) {
+            //     Debug.Log ("press t");
+            //     photonView.RPC (nameof (Ignition), RpcTarget.All);
+            // }
+            // if (Input.GetKeyDown ("f")) {
+            //     Debug.Log ("press f");
+            //     isFadeOut = true;
+            // }
         }
 
         if (isFadeOut) FadeOut ();
