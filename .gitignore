@@ -90,3 +90,5 @@ upload/
 docs/.DS_Store
 
 .DS_Store
+
+Assets/UI/Script/Sound/audio.cs.meta~UI2.meta
