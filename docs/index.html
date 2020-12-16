@@ -8,25 +8,9 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
-    <button onclick="deviceMotionRequest()">動作と方向へのアクセス許可</button>
-    <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas"></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
-        </div>
-      </div>
-      <div id="unity-footer">
-        <div id="unity-webgl-logo"></div>
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Fire Flower</div>
-      </div>
-    </div>
-    <script>
-      function deviceMotionRequest() {
-            if (DeviceOrientationEvent.requestPermission) {
-                DeviceOrientationEvent.requestPermission()
+    function deviceMotionRequest() {
+            if (DeviceMotionEvent.requestPermission) {
+                DeviceMotionEvent.requestPermission()
                     .then(permissionState => {
                         if (permissionState === 'granted') {
                             window.addEventListener("devicemotion", function (event) {
@@ -48,6 +32,22 @@
                 alert('DeviceMotionEvent.requestPermission is not found')
             }
         }
+    <button onclick="deviceMotionRequest()">Click</button>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title">Fire Flower</div>
+      </div>
+    </div>
+    <script>
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/deploy.loader.js";
       var config = {
