@@ -18,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - fireworks
   - 
   - 
   - 
@@ -51,4 +51,7 @@ TagManager:
     locked: 0
   - name: bullet
     uniqueID: 2271677519
+    locked: 0
+  - name: fireworks
+    uniqueID: 3850694477
     locked: 0
