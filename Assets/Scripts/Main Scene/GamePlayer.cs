@@ -1,4 +1,4 @@
-﻿using Photon.Pun;
+using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +27,9 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
     bool isFadeIn = false;
     bool isFadeOut = false;
     bool isRespawn = false;
+
+    //水が落ちる音
+    public AudioSource water_sound;
 
     private void Awake () {
 
@@ -111,6 +114,7 @@ public class GamePlayer : MonoBehaviourPunCallbacks, IPunObservable {
             } else if (other.tag == "Water") {
                 if (particle.activeSelf) {
                     photonView.RPC (nameof (BurnOut), RpcTarget.All);
+                    water_sound.Play();
                 }
             }
         }

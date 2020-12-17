@@ -15,6 +15,7 @@ public class audio : MonoBehaviour
     Image image;
     AudioSource BGM;
     void Start() {
+	}
                     // b1.SetActive(false);
                     //b1=GetComponent<Button>();//buttonコンポネ取得
         image = GetComponent<Image>();
