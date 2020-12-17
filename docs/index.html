@@ -12,7 +12,14 @@
       window.alert("iPhone iOS13以上の端末からアクセスをお願いいたします");
       window.alert("上部ボタンを押して「動作と方向へのアクセス許可」をお願いいたします")
     </script>
-    <button class = "btn-square-pop" id = "permit" onclick="deviceMotionRequest()">動作と方向へのアクセス許可</button>
+    <div>
+      <button class = "btn-square-pop" 
+              id = "permit" 
+              style="width:30%;padding:10px;font-size:30px;"
+              onclick="deviceMotionRequest()">
+              動作と方向へのアクセス許可
+      </button>
+    </div>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas"></canvas>
       <div id="unity-loading-bar">
