@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
-    <button onclick="deviceMotionRequest()">動作と方向へのアクセス許可</button>
+    <script type="text/javascript">
+      window.alert("iPhone iOS13以上の端末からアクセスをお願いいたします");
+      window.alert("上部ボタンを押して「動作と方向へのアクセス許可」をお願いいたします")
+    </script>
+    <button class = "btn-square-pop" id = "permit" onclick="deviceMotionRequest()">動作と方向へのアクセス許可</button>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas"></canvas>
       <div id="unity-loading-bar">
@@ -25,12 +29,14 @@
     </div>
     <script>
       function deviceMotionRequest() {
-          if (DeviceOrientationEvent.requestPermission) {
-              DeviceOrientationEvent.requestPermission();
-          } else {
-              alert('DeviceMotionEvent.requestPermission is not found')
-          }
-      }
+            if (DeviceOrientationEvent.requestPermission) {
+                DeviceOrientationEvent.requestPermission();
+            } else {
+                alert('DeviceMotionEvent.requestPermission is not found')
+            }
+
+            document.getElementById("permit").style.display="none";
+        }
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/deploy.loader.js";
       var config = {
@@ -74,5 +80,25 @@
       };
       document.body.appendChild(script);
     </script>
+
+    <style>
+      .btn-square-pop {
+        position: relative;
+        display: inline-block;
+        padding: 0.25em 0.5em;
+        text-decoration: none;
+        color: #FFF;
+        background: #0000cd;/*背景色*/
+        border-bottom: solid 2px #0000b3;/*少し濃い目の色に*/
+        border-radius: 4px;/*角の丸み*/
+        box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+        font-weight: bold;
+      }
+
+      .btn-square-pop:active {
+        border-bottom: solid 2px #0000cd;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+      }
+    </style>
   </body>
 </html>
