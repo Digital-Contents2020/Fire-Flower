@@ -12,7 +12,7 @@ public class audio : MonoBehaviour
     public AudioSource AudioSource;
     void Start() {
         AudioSource.Play(); //defaultで音を鳴らす
-         b1.SetActive(false);
+         //b1.SetActive(false);
         //b1=GetComponent<Button>();//buttonコンポネ取得
        
 	}
