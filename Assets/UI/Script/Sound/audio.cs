@@ -14,6 +14,7 @@ public class audio : MonoBehaviour
     void Start() {
         image = GetComponent<Image>();
         BGM = GetComponent<AudioSource>();
+        BGM.Play();
     }
 
 	public void OnClick() { //ボタンクリックしたら
