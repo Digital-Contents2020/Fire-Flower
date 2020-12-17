@@ -8,6 +8,8 @@ public class sousa2 : MonoBehaviour
     public GameObject panel;
     public GameObject button;
     public GameObject loginpanel;
+    public GameObject items;
+
     void Start()
     {
         //panel.SetActive(false);
@@ -15,9 +17,19 @@ public class sousa2 : MonoBehaviour
 
      public void OnClick() { //ボタンクリックしたら
         Debug.Log ("Return clicked2");
-        panel.SetActive(true);
-        button.SetActive(true);
-        loginpanel.SetActive(false);
+        if(this.gameObject.tag == "return"){
+
+            panel.SetActive(false);
+            button.SetActive(false);
+            loginpanel.SetActive(true);
+            items.SetActive(true);
+        }
+        else if(this.tag == "explain"){
+            panel.SetActive(true);
+            button.SetActive(true);
+            loginpanel.SetActive(false);
+            items.SetActive(false);
+        }
     }
    
 }
